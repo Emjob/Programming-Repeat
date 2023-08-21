@@ -10,10 +10,10 @@ public class NPC_Movement : MonoBehaviour
 
     private bool endTurn = true;
 
-    public float range; //radius of sphere
+    public float range; 
 
     public Vector3 Destination;
-//    private Vector3 point;
+
 
     private GameObject Player;
     private GameObject AllyTarget;
@@ -23,8 +23,8 @@ public class NPC_Movement : MonoBehaviour
     HUDBehaviour Query;
     NPC_Values NPC_Stats;
 
-    public Transform centrePoint; //centre of the area the agent wants to move around in
-    //instead of centrePoint you can set it as the transform of the agent if you don't care about a specific area
+    public Transform centrePoint; 
+    
 
     void Start()
     {
@@ -109,11 +109,11 @@ public class NPC_Movement : MonoBehaviour
     {
         
 
-        if (agent.remainingDistance <= agent.stoppingDistance) //done with path
+        if (agent.remainingDistance <= agent.stoppingDistance) 
         {
             centrePoint = GetComponent<Transform>();
             Vector3 point;
-            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            if (RandomPoint(centrePoint.position, range, out point)) 
             {
                 agent.SetDestination(point);
                 Destination = point;
@@ -124,11 +124,11 @@ public class NPC_Movement : MonoBehaviour
     }
     void enemyMove()
     {
-        if (agent.remainingDistance <= agent.stoppingDistance) //done with path
+        if (agent.remainingDistance <= agent.stoppingDistance) 
         {
             centrePoint = Player.GetComponent<Transform>();
             Vector3 point;
-            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            if (RandomPoint(centrePoint.position, range, out point)) 
             {
                 agent.SetDestination(point);
                 Destination = point;
@@ -139,11 +139,11 @@ public class NPC_Movement : MonoBehaviour
     }
     void AllyMove()
     {
-        if (agent.remainingDistance <= agent.stoppingDistance) //done with path
+        if (agent.remainingDistance <= agent.stoppingDistance) 
         {
             centrePoint = Player.GetComponent<Transform>();
             Vector3 point;
-            if (RandomPoint(centrePoint.position, range, out point)) //pass in our centre point and radius of area
+            if (RandomPoint(centrePoint.position, range, out point)) 
             {
                 agent.SetDestination(point);
                 Destination = point;
@@ -155,12 +155,11 @@ public class NPC_Movement : MonoBehaviour
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
 
-        Vector3 randomPoint = center + Random.insideUnitSphere * range; //random point in a sphere 
+        Vector3 randomPoint = center + Random.insideUnitSphere * range; 
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) 
         {
-            //the 1.0f is the max distance from the random point to a point on the navmesh, might want to increase if range is big
-            //or add a for loop like in the documentation
+            
             result = hit.position;
             return true;
         }
